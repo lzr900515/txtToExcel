@@ -1,0 +1,14 @@
+{
+  "name": "report-maker",
+  "version": "1.0.0",
+  "description": "将固定格式的txt文件导出为Excel文件",
+  "main": "report-maker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Konata9",
+  "license": "MIT",
+  "devDependencies": {
+    "xlsx": "^0.10.6"
+  }
+}
