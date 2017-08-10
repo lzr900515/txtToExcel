@@ -6,7 +6,7 @@ var config = {
   // 对象文件存放目录
   filePath: 'D:/WorkSpace/Report',
   // 对象文件名
-  fileName: 'Policy.txt',
+  fileName: 'policy_0810.txt',
   // 源文件切割规则
   splitRules: {
     policyName: 'Policy Name:',

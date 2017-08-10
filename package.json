@@ -9,6 +9,8 @@
   "author": "Konata9",
   "license": "MIT",
   "devDependencies": {
+    "docx": "^2.0.1",
+    "officegen": "^0.4.5",
     "xlsx": "^0.10.6"
   }
 }

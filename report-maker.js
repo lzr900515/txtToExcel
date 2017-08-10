@@ -25,10 +25,12 @@ var filePath = path.join(config.filePath, config.fileName);
  */
 function policyFormatter(policy) {
 
+  console.log(policy)
+
   var policyNameMatcher = new RegExp(config.splitRules.policyName + "([\\s\\w\\d\\-]*)\\r\\n"),
     clientMatcher = new RegExp(config.splitRules.client + "([\\s\\w\\d\\?\\-\\.]*)\\r\\n", "g"),
     policyTypeMatcher = new RegExp(config.splitRules.policyType + "([\\s\\w\\d\\(\\)\\-]*)\\r\\n"),
-    includeMatcher = new RegExp(config.splitRules.include + "([\\s/\\w\\.\\\\:_\\?=\\\"\\*]*)\\r\\n", "g");
+    includeMatcher = new RegExp(config.splitRules.include + "([\\s/\\w\\.\\\\:_\\?=\\\"\\*\\W]*)\\r\\n", "g");
 
   var scheduleLists = policy.split(config.splitRules.schedule).slice(1),
     scheduleFormatLists = [],
@@ -45,9 +47,9 @@ function policyFormatter(policy) {
     policyName: policy.match(policyNameMatcher)[1].trim(),
     client: policy.match(clientMatcher) ? policy.match(clientMatcher).join('').trim() : '',
     policyType: policy.match(policyTypeMatcher)[1].trim(),
-    include: policy.match(includeMatcher).join('').trim(),
+    include: policy.match(includeMatcher)?policy.match(includeMatcher).join('').trim():'',
     schedule: scheduleFormatLists.join('').trim(),
-    scheduleResidence: scheduleLists[0].match(scheduleResidenceMatcher)[1].trim()
+    scheduleResidence: scheduleLists[0]?scheduleLists[0].match(scheduleResidenceMatcher)[1].trim():''
   };
 
   // console.dir(results);
