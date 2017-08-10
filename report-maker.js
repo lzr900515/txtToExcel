@@ -25,7 +25,7 @@ var filePath = path.join(config.filePath, config.fileName);
  */
 function policyFormatter(policy) {
 
-  console.log(policy)
+  // console.log(policy)
 
   var policyNameMatcher = new RegExp(config.splitRules.policyName + "([\\s\\w\\d\\-]*)\\r\\n"),
     clientMatcher = new RegExp(config.splitRules.client + "([\\s\\w\\d\\?\\-\\.]*)\\r\\n", "g"),
