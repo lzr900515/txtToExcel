@@ -43,15 +43,16 @@ function policyFormatter(policy) {
 
   // console.log(scheduleFormatLists);
 
+  // console.dir(policy.match(includeMatcher));
+
   var results = {
     policyName: policy.match(policyNameMatcher)[1].trim(),
     client: policy.match(clientMatcher) ? policy.match(clientMatcher).join('').trim() : '',
     policyType: policy.match(policyTypeMatcher)[1].trim(),
-    include: policy.match(includeMatcher)?policy.match(includeMatcher).join('').trim():'',
+    include: policy.match(includeMatcher)?policy.match(includeMatcher).join('').split('Schedule')[0].trim():'',
     schedule: scheduleFormatLists.join('').trim(),
     scheduleResidence: scheduleLists[0]?scheduleLists[0].match(scheduleResidenceMatcher)[1].trim():''
   };
-
   // console.dir(results);
   return results;
 }
