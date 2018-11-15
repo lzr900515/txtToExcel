@@ -4,7 +4,7 @@
 
 var config = {
   // 对象文件存放目录
-  filePath: 'D:/WorkSpace/Report',
+  filePath: 'importTxt/',
   // 对象文件名
   fileName: 'policy_0810.txt',
   // 源文件切割规则
@@ -19,7 +19,7 @@ var config = {
   // 导出Excel相关配置
   excelConfig: {
     // 导出excel的目录
-    excelPath: 'D:/WorkSpace/Report/report-maker/data',
+    excelPath: 'exportExcel',
     // 导出excel的文件名
     excelName: 'Policy.xlsx',
     // Excel表头
