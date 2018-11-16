@@ -1,16 +1,26 @@
 {
-  "name": "report-maker",
-  "version": "1.0.0",
-  "description": "将固定格式的txt文件导出为Excel文件",
-  "main": "report-maker.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Konata9",
-  "license": "MIT",
-  "devDependencies": {
-    "docx": "^2.0.1",
-    "officegen": "^0.4.5",
-    "xlsx": "^0.10.6"
-  }
+    "name": "report-maker",
+    "version": "1.0.0",
+    "description": "node文本解析工具",
+    "main": "index.js",
+    "scripts": {
+        "test": "node --inspect-brk ./main.js",
+        "start": "nodemon --watch main.js --watch src ./index.js "
+    },
+    "author": "lizeren",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/register": "^7.0.0",
+        "docx": "^2.0.1",
+        "officegen": "^0.4.5",
+        "xlsx": "^0.10.6"
+    },
+    "dependencies": {
+        "exceljs": "^1.6.2"
+    }
 }

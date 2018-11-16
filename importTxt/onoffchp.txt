@@ -265,9 +265,9 @@ BJ01                      1                                          No 81 Jiang
 BJ01                      1                                          kundulun district                aerding street
 00000               09/02/2019  Baotou                               Shenhua apartment A219b          CHINA
 ------------------------------------------------------------------------------------------------------------------------------------
-7X/601    09350923  710075      Ms Min Yue                                                            Xi’an Yiyaoyuan
+7X/601    09350923  710075      Ms Min Yue                                                            Xiï¿½an Yiyaoyuan
 BJ01                      1                                          No.32 of Kejiyi Road             No.32 of Kejiyi Road,Yanta
-00000               09/02/2019  Xi’an City                           Shaanxi Province                 China
+00000               09/02/2019  Xiï¿½an City                           Shaanxi Province                 China
 ------------------------------------------------------------------------------------------------------------------------------------
 7X/601    09352320  100004      Mr Qiang Xue                                                          Jones Day
 BJ01                      1                                          Jones Day                        32 floor  China World Office 1
@@ -477,8 +477,8 @@ SHZZ                      1                                          688 xi zang
 00000               09/02/2019  shanghai                             389757                           CHINA
 ------------------------------------------------------------------------------------------------------------------------------------
 7X/602    09353737              Miss Shuyuan Cai
-SHZZ                      1                                          Flat 102  Unit 1 Building 5      Changwa No 7 Courtyard
-00000               16/02/2019  Haidian Dist                         Beijing                          CHINA
+SHZZ      09353737        1                                          Flat 102  Unit 1 Building 5      Changwa No 7 Courtyard
+00000     09353737  16/02/2019  Haidian Dist                         Beijing                          CHINA
 ------------------------------------------------------------------------------------------------------------------------------------
 
 Quadrant Subscriptions Services                                                                                  Page:   11

@@ -3,30 +3,84 @@
  */
 
 var config = {
-  // 对象文件存放目录
-  filePath: 'importTxt/',
-  // 对象文件名
-  fileName: 'policy_0810.txt',
-  // 源文件切割规则
-  splitRules: {
-    policyName: 'Policy Name:',
-    client: 'Client/HW/OS/Pri/CIT:',
-    policyType: 'Policy Type:',
-    include: 'Include:',
-    schedule: 'Schedule:',
-    scheduleResidence: 'Residence:'
-  },
-  // 导出Excel相关配置
-  excelConfig: {
-    // 导出excel的目录
-    excelPath: 'exportExcel',
-    // 导出excel的文件名
-    excelName: 'Policy.xlsx',
-    // Excel表头
-    tableHead: ['policyName', 'client', 'policyType', 'include', 'schedule', 'scheduleResidence'],
-    // WorkSheet结构
-    sheetName: 'Policy'
-  }
+    // 对象文件存放目录
+    filePath: './importTxt',
+    // 源文件切割规则
+    splitRules: {
+        lineDividerMark: '$$$LZR_LINE_DIVIDER$$$',
+        page: 'Quadrant Subscriptions Services',
+        tableBegin: '7X/602',
+        offThisWeek: 'Off This Week',
+        onThisWeek: 'On This Week',
+        rowLength: 3, //3行有效数据
+        columnLength: 132, //每行132字符
+        columnWidth: [
+            0,
+            10,
+            20,
+            32,
+            69,
+            102,
+            131
+        ]//每列宽度
+
+    },
+    // 导出Excel相关配置
+    excelConfig: {
+        // Excel表头
+        tableHead: [
+            {
+                header: '户号',
+                key: 'huhao'
+            },
+            {
+                header: '线号',
+                key: 'xianhao'
+            },
+            {
+                header: '起期',
+                key: 'qiqi',
+                width: 20
+            },
+            {
+                header: '止期',
+                key: 'zhiqi',
+                width: 20
+            },
+            {
+                header: '户名',
+                key: 'huming',
+                width: 20
+            },
+            {
+                header: '订户分类',
+                key: 'dinghufenlei',
+            },
+            {
+                header: '份数',
+                key: 'fenshu'
+            },
+            {
+                header: '职务',
+                key: 'zhiwu',
+                width: 20
+            },
+            {
+                header: '单位',
+                key: 'danwei',
+                width: 50
+            },
+            {
+                header: '地址',
+                key: 'dizhi',
+                width: 100
+            },
+            {
+                header: '邮编',
+                key: 'youbian'
+            }
+        ]
+    }
 };
 
 module.exports = config;
