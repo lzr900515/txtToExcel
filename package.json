@@ -23,6 +23,7 @@
     "dependencies": {
         "exceljs": "^1.6.2",
         "md5-node": "^1.0.1",
-        "node-fetch": "^2.3.0"
+        "node-fetch": "^2.3.0",
+        "uuid": "^3.3.2"
     }
 }

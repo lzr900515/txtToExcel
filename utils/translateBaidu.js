@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const config = require('../config/config');
 const MD5 = require('./md5').MD5;
+const uuidv1 = require('uuid/v1');
 
 function objToURI(obj = {}) {
     let uri = '';
@@ -17,7 +18,7 @@ function objToURI(obj = {}) {
 module.exports.translateBaidu = function (english) {
     let appid = config.baiduConfig.appid;
     let key = config.baiduConfig.key;
-    let salt = (new Date).getTime();
+    let salt = uuidv1();
     let query = english;
     let from = 'en';
     let to = 'zh';
