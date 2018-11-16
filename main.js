@@ -4,10 +4,13 @@
 const fs = require('fs');
 const config = require('./config/config');
 const Excel = require("exceljs");
+const translateBaidu = require('./utils/translateBaidu').translateBaidu;
 
 const importTxtList = fs.readdirSync(config.filePath);
 importTxtList.forEach((filename, i) => {
     let workbook = new Excel.Workbook();
+    let onPromiseAll = [];
+    let offPromiseAll = [];
     let importFileInfo = {
         name: filename,
         exportName: filename.split('.')[0] + '.xlsx',
@@ -31,10 +34,25 @@ importTxtList.forEach((filename, i) => {
                     };
                     pageInfo.onThisWeek = page.includes(`${config.splitRules.onThisWeek}`);
                     console.log(`开始解析_____Page-${index}` + '_____ On This Week: ' + pageInfo.onThisWeek + '_____');
-                    getTablesFromPage(page).forEach((tableDataArr, tableNum) => {
+                    getTablesFromPage(page).forEach(tableDataArr => {
                         // 过滤 \f 数据
                         if (tableDataArr.length > 2) {
-                            pageInfo.tableList[tableNum] = getTableKeyMap(tableDataArr);
+                            let formatData = getTableKeyMap(tableDataArr);
+                            //过滤一下地址
+                            let filterAddress = ['SHANGHAI','JIANGSU','ZHEJIANG', 'JIANGXI', 'ANHUI', 'FUJIAN', 'HUNAN', 'HUBEI'];
+                            let notInfilterArr = !filterAddress.some(address =>
+                                formatData.dizhi.toUpperCase().includes(address)
+                            );
+                            if (notInfilterArr) {
+                                pageInfo.tableList.push(formatData);
+                                if (pageInfo.onThisWeek) {
+                                    onPromiseAll.push(translateBaidu(formatData.dizhi));
+                                } else {
+                                    offPromiseAll.push(translateBaidu(formatData.dizhi));
+                                }
+                            }else{
+                                console.log(`${formatData.dizhi.toUpperCase()} 不在负责范围内，已被过滤！！！！`);
+                            }
                         }
                     });
                     if (pageInfo.onThisWeek) {
@@ -44,16 +62,37 @@ importTxtList.forEach((filename, i) => {
                     }
                 });
             }
-
-            // 生成excel
-            let onWorkSheet = workbook.addWorksheet("onThisWeek");
-            let offWorkSheet = workbook.addWorksheet("offThisWeek");
-            onWorkSheet.columns = config.excelConfig.tableHead;
-            onWorkSheet.addRows(importFileInfo.onThisWeek);
-            offWorkSheet.columns = config.excelConfig.tableHead;
-            offWorkSheet.addRows(importFileInfo.offThisWeek);
-            workbook.xlsx.writeFile(`./exportExcel/${importFileInfo.exportName}`).then(function () {
-                console.log(`文件:${filename}已处理完成`);
+            let on = Promise.all(onPromiseAll).then(result => {
+                result.forEach((data, i) => {
+                    if (data.error_code) {
+                        importFileInfo.onThisWeek[i].zh_dizhi = `翻译失败：（${data.error_msg}）`;
+                    } else {
+                        importFileInfo.onThisWeek[i].zh_dizhi = data.trans_result[0].dst;
+                    }
+                });
+            });
+            let off = Promise.all(offPromiseAll).then(result => {
+                result.forEach((data, i) => {
+                    if (data.error_code) {
+                        importFileInfo.offThisWeek[i].zh_dizhi = `翻译失败：（${data.error_msg}）`;
+                    } else {
+                        importFileInfo.offThisWeek[i].zh_dizhi = data.trans_result[0].dst;
+                    }
+                });
+            });
+            Promise.all([on, off]).then(result => {
+                // 生成excel
+                let onWorkSheet = workbook.addWorksheet("onThisWeek");
+                let offWorkSheet = workbook.addWorksheet("offThisWeek");
+                onWorkSheet.columns = config.excelConfig.tableHead;
+                onWorkSheet.addRows(importFileInfo.onThisWeek);
+                offWorkSheet.columns = config.excelConfig.tableHead;
+                offWorkSheet.addRows(importFileInfo.offThisWeek);
+                workbook.xlsx.writeFile(`./exportExcel/${importFileInfo.exportName}`).then(function () {
+                    console.log(`文件:${filename}已处理完成`);
+                });
+            }).catch(err => {
+                console.log('网络异常，翻译失败', err);
             });
         });
     } else {

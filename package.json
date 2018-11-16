@@ -21,6 +21,8 @@
         "xlsx": "^0.10.6"
     },
     "dependencies": {
-        "exceljs": "^1.6.2"
+        "exceljs": "^1.6.2",
+        "md5-node": "^1.0.1",
+        "node-fetch": "^2.3.0"
     }
 }

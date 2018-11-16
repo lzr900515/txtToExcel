@@ -72,14 +72,24 @@ var config = {
             },
             {
                 header: '地址',
-                key: 'dizhi',
+                key: 'zh_dizhi',
                 width: 100
             },
             {
                 header: '邮编',
                 key: 'youbian'
+            },            {
+                header: '地址',
+                key: 'dizhi',
+                width: 100
             }
         ]
+    },
+    // 百度翻译配置
+    baiduConfig: {
+        appid: '20181116000235338',
+        key: '_IcS28x2bMtcENqA1r8s',
+        url: 'https://fanyi-api.baidu.com/api/trans/vip/translate',
     }
 };
 
