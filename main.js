@@ -38,9 +38,9 @@ importTxtList.forEach((filename, i) => {
                         }
                     });
                     if (pageInfo.onThisWeek) {
-                        importFileInfo.onThisWeek = [...importFileInfo.onThisWeek, ...pageInfo.tableList];
+                        importFileInfo.onThisWeek = importFileInfo.onThisWeek.concat(pageInfo.tableList);
                     } else {
-                        importFileInfo.offThisWeek = [...importFileInfo.offThisWeek, ...pageInfo.tableList];
+                        importFileInfo.offThisWeek = importFileInfo.offThisWeek.concat(pageInfo.tableList);
                     }
                 });
             }
