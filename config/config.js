@@ -27,8 +27,15 @@ var config = {
     },
     // 导出Excel相关配置
     excelConfig: {
-        // Excel表头
-        tableHead: [
+        // offThisWeek Excel表头
+        offTableHead: [
+            {
+                header: '户号',
+                key: 'huhao'
+            }
+        ],
+        // onThisWeek Excel表头
+        onTableHead: [
             {
                 header: '户号',
                 key: 'huhao'

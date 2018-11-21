@@ -39,7 +39,7 @@ importTxtList.forEach((filename, i) => {
                         if (tableDataArr.length > 2) {
                             let formatData = getTableKeyMap(tableDataArr);
                             //过滤一下地址
-                            let filterAddress = ['SHANGHAI','JIANGSU','ZHEJIANG', 'JIANGXI', 'ANHUI', 'FUJIAN', 'HUNAN', 'HUBEI'];
+                            let filterAddress = ['SHANGHAI', 'JIANGSU', 'ZHEJIANG', 'JIANGXI', 'ANHUI', 'FUJIAN', 'HUNAN', 'HUBEI'];
                             let notInfilterArr = !filterAddress.some(address =>
                                 formatData.dizhi.toUpperCase().includes(address)
                             );
@@ -47,10 +47,10 @@ importTxtList.forEach((filename, i) => {
                                 pageInfo.tableList.push(formatData);
                                 if (pageInfo.onThisWeek) {
                                     onPromiseAll.push(translateBaidu(formatData.dizhi));
-                                } else {
-                                    offPromiseAll.push(translateBaidu(formatData.dizhi));
+                                }else{
+                                    formatData.huhao = 'A' + formatData.huhao;
                                 }
-                            }else{
+                            } else {
                                 console.log(`${formatData.dizhi.toUpperCase()} 不在负责范围内，已被过滤！！！！`);
                             }
                         }
@@ -62,7 +62,7 @@ importTxtList.forEach((filename, i) => {
                     }
                 });
             }
-            let on = Promise.all(onPromiseAll).then(result => {
+            Promise.all(onPromiseAll).then(result => {
                 result.forEach((data, i) => {
                     if (data.error_code) {
                         importFileInfo.onThisWeek[i].zh_dizhi = `翻译失败：（${data.error_msg}）`;
@@ -70,23 +70,13 @@ importTxtList.forEach((filename, i) => {
                         importFileInfo.onThisWeek[i].zh_dizhi = data.trans_result[0].dst;
                     }
                 });
-            });
-            let off = Promise.all(offPromiseAll).then(result => {
-                result.forEach((data, i) => {
-                    if (data.error_code) {
-                        importFileInfo.offThisWeek[i].zh_dizhi = `翻译失败：（${data.error_msg}）`;
-                    } else {
-                        importFileInfo.offThisWeek[i].zh_dizhi = data.trans_result[0].dst;
-                    }
-                });
-            });
-            Promise.all([on, off]).then(result => {
+            }).then(result => {
                 // 生成excel
                 let onWorkSheet = workbook.addWorksheet("onThisWeek");
                 let offWorkSheet = workbook.addWorksheet("offThisWeek");
-                onWorkSheet.columns = config.excelConfig.tableHead;
+                onWorkSheet.columns = config.excelConfig.onTableHead;
                 onWorkSheet.addRows(importFileInfo.onThisWeek);
-                offWorkSheet.columns = config.excelConfig.tableHead;
+                offWorkSheet.columns = config.excelConfig.offTableHead;
                 offWorkSheet.addRows(importFileInfo.offThisWeek);
                 workbook.xlsx.writeFile(`./exportExcel/${importFileInfo.exportName}`).then(function () {
                     console.log(`文件:${filename}已处理完成`);

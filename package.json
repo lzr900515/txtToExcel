@@ -1,5 +1,5 @@
 {
-    "name": "report-maker",
+    "name": "txtToExcel",
     "version": "1.0.0",
     "description": "node文本解析工具",
     "main": "index.js",
