@@ -9,7 +9,7 @@ var config = {
     splitRules: {
         lineDividerMark: '$$$LZR_LINE_DIVIDER$$$',
         page: 'Quadrant Subscriptions Services',
-        tableBegin: '7X/602',
+        tableBegin: '7X/60',
         offThisWeek: 'Off This Week',
         onThisWeek: 'On This Week',
         rowLength: 3, //3行有效数据
@@ -23,7 +23,6 @@ var config = {
             102,
             131
         ]//每列宽度
-
     },
     // 导出Excel相关配置
     excelConfig: {
