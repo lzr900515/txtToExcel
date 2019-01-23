@@ -32,6 +32,7 @@ module.exports.translateBaidu = function (english) {
         to: to,
         sign: sign
     });
+    console.log(`======URL:${config.baiduConfig.url}${uri}======`);
     return fetch(`${config.baiduConfig.url}${uri}`, {
         method: 'get',
         headers: {'Content-Type': 'application/json'}

@@ -46,8 +46,9 @@ importTxtList.forEach((filename, i) => {
                             if (notInfilterArr) {
                                 pageInfo.tableList.push(formatData);
                                 if (pageInfo.onThisWeek) {
-                                    onPromiseAll.push(translateBaidu(formatData.dizhi));
-                                }else{
+                                    // get请求，#号后的无法传输
+                                    onPromiseAll.push(translateBaidu(formatData.dizhi.replace('#', '')));
+                                } else {
                                     formatData.huhao = 'A' + formatData.huhao;
                                 }
                             } else {
